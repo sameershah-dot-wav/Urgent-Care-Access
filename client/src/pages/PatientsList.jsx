@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect} from 'react'
 import ReactTable from 'react-table'
 import api from '../api'
 
@@ -62,34 +62,35 @@ export function DeletePatient (props) {
 }
 
 
+export default function PatientsList () {
 
-class PatientsList extends Component {
+    const [patients, setPatients] = useState([])
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            patients: [],
-            columns: [],
-            isLoading: false,
-        }
-    }
+    const [isLoading, setLoading] = useState(false)
 
-    componentDidMount = async () => {
-        this.setState({ isLoading: true })
+        
+        useEffect(() => {
+            fetchData();
 
-        await api.getAllPatients().then(patients => {
-            this.setState({
-                patients: patients.data.data,
-                isLoading: false,
-            })
-        })
-    }
-
+            async function fetchData() {
+                setLoading(true)
     
+                const response = await api.getAllPatients()
+                
+                const data = response.data
+    
+                setPatients(data)
 
-    render() {
-        const { patients, isLoading } = this.state
-        console.log('TCL: PatientsList -> render -> patients', patients)
+                console.log(patients)
+                
+            }
+
+        }, []);
+
+        useEffect(() => {
+            setLoading(false)
+        }, [patients])
+    
 
         const columns = [
             {
@@ -132,15 +133,15 @@ class PatientsList extends Component {
         ]
 
         let showTable = true
-        if (!patients.length) {
-            showTable = false
-        }
+        // if (!patients.length) {
+        //     showTable = false
+        // }
 
         return (
             <Wrapper>
                 {showTable && (
                     <ReactTable
-                        data={patients}
+                        data = {patients.data}
                         columns={columns}
                         loading={isLoading}
                         defaultPageSize={10}
@@ -151,6 +152,3 @@ class PatientsList extends Component {
             </Wrapper>
         )
     }
-}
-
-export default PatientsList

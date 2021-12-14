@@ -1,7 +1,9 @@
-import React, { Component } from 'react'
-import api from '.../api'
+import React, { Component, useState, useEffect } from 'react'
+import api from '../api'
 
 import styled from 'styled-components'
+
+
 
 const Title = styled.h1.attrs({
     className: 'h1',
@@ -34,6 +36,45 @@ const CancelButton = styled.a.attrs({
 })`
     margin: 15px 15px 15px 15px;
 `
+
+export default function PatientsInsert(props) {
+
+    const [name, setName] = useState('')
+    const [dob, setDob] = useState('')
+
+
+    useEffect(() => {
+        handleChangeInputName();
+
+        async function handleChangeInputName(e) {
+            const name = e.target.value
+            setName(name)
+        }
+    }, [name]);
+
+    useEffect(() => {
+        handleChangeInputDob();
+        
+        async function handleChangeInputDob(e) {
+            const dob = e.target.value
+            setDob(dob)
+        }
+    }, [dob]);
+
+    useEffect(() => {
+
+        async function handleIncludePatient(e) {
+            const payload = {name, dob}
+
+            await api.insertPatient(payload).then(res => {
+                window.alert(`Patient Inserted Successfully`)
+                setName('')
+                setDob('')
+            })
+        }
+    })
+
+}
 
 
 

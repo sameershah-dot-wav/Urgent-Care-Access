@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from 'react'
+import React, {useState} from 'react'
 import api from '../api'
 
 import styled from 'styled-components'
@@ -43,27 +43,19 @@ export default function PatientsInsert(props) {
     const [dob, setDob] = useState('')
 
 
-    useEffect(() => {
-        handleChangeInputName();
-
         async function handleChangeInputName(e) {
             const name = e.target.value
             setName(name)
         }
-    }, [name]);
 
-    useEffect(() => {
-        handleChangeInputDob();
         
         async function handleChangeInputDob(e) {
             const dob = e.target.value
             setDob(dob)
         }
-    }, [dob]);
 
-    useEffect(() => {
 
-        async function handleIncludePatient(e) {
+        async function handleIncludePatient() {
             const payload = {name, dob}
 
             await api.insertPatient(payload).then(res => {
@@ -72,7 +64,30 @@ export default function PatientsInsert(props) {
                 setDob('')
             })
         }
-    })
+
+
+    return(
+        <Wrapper>
+            <Title>Create Patient</Title>
+
+            <Label>Name: </Label>
+            <InputText
+                type="text"
+                value={name}
+                onChange={handleChangeInputName} 
+            />
+
+            <Label>Dob: </Label>
+            <InputText
+            type={Date}
+            value={dob}
+            onChange={handleChangeInputDob}
+            />
+
+            <Button onClick={handleIncludePatient}> Add Patient </Button>
+            <CancelButton href={'/patients/list'}> Cancel </CancelButton>
+        </Wrapper>
+    )
 
 }
 

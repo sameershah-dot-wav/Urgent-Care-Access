@@ -1,95 +1,96 @@
-import React, {useState} from 'react'
-import api from '../api'
+import React, { useState } from "react";
+import api from "../api";
 
-import styled from 'styled-components'
-
-
+import styled from "styled-components";
 
 const Title = styled.h1.attrs({
-    className: 'h1',
-})``
+  className: "h1",
+})``;
 
 const Wrapper = styled.div.attrs({
-    className: 'form-group',
+  className: "form-group",
 })`
-    margin: 0 30px;
-`
+  margin: 0 30px;
+`;
 
 const Label = styled.label`
-    margin: 5px;
-`
+  margin: 5px;
+`;
 
 const InputText = styled.input.attrs({
-    className: 'form-control',
+  className: "form-control",
 })`
-    margin: 5px;
-`
+  margin: 5px;
+`;
 
 const Button = styled.button.attrs({
-    className: `btn btn-primary`,
+  className: `btn btn-primary`,
 })`
-    margin: 15px 15px 15px 15px;
-`
+  margin: 15px 15px 15px 15px;
+`;
 
 const CancelButton = styled.a.attrs({
-    className: `btn btn-danger`,
+  className: `btn btn-danger`,
 })`
-    margin: 15px 15px 15px 15px;
-`
+  margin: 15px 15px 15px 15px;
+`;
 
-export default function PatientsInsert(props) {
+export default function PatientsInsert() {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [dob, setDob] = useState("");
 
-    const [name, setName] = useState('')
-    const [dob, setDob] = useState('')
+  async function handleChangeInputFirstName(e) {
+    const firstName = e.target.value;
+    setFirstName(firstName);
+  }
 
+  async function handleChangeInputLastName(e) {
+    const lastName = e.target.value;
+    setLastName(lastName);
+  }
 
-        async function handleChangeInputName(e) {
-            const name = e.target.value
-            setName(name)
-        }
+  async function handleChangeInputDob(e) {
+    const dob = e.target.value;
+    setDob(dob);
+  }
 
-        
-        async function handleChangeInputDob(e) {
-            const dob = e.target.value
-            setDob(dob)
-        }
+  async function handleIncludePatient() {
+    const payload = { firstName, lastName, dob };
 
+    await api.insertPatient(payload).then((res) => {
+      window.alert(`Patient Inserted Successfully`);
+      setFirstName("");
+      setLastName("");
+      setDob("");
 
-        async function handleIncludePatient() {
-            const payload = {name, dob}
+      console.log(lastName);
+    });
+  }
 
-            await api.insertPatient(payload).then(res => {
-                window.alert(`Patient Inserted Successfully`)
-                setName('')
-                setDob('')
-            })
-        }
+  return (
+    <Wrapper>
+      <Title>Create Patient</Title>
 
+      <Label>First Name: </Label>
+      <InputText
+        type="text"
+        value={firstName}
+        onChange={handleChangeInputFirstName}
+      />
 
-    return(
-        <Wrapper>
-            <Title>Create Patient</Title>
+      <Label>Last Name: </Label>
+      <InputText
+        type="text"
+        value={lastName}
+        onChange={handleChangeInputLastName}
+      />
 
-            <Label>Name: </Label>
-            <InputText
-                type="text"
-                value={name}
-                onChange={handleChangeInputName} 
-            />
+      <Label>Dob: </Label>
+      <InputText type={Date} value={dob} onChange={handleChangeInputDob} />
 
-            <Label>Dob: </Label>
-            <InputText
-            type={Date}
-            value={dob}
-            onChange={handleChangeInputDob}
-            />
-
-            <Button onClick={handleIncludePatient}> Add Patient </Button>
-            <CancelButton href={'/patients/list'}> Cancel </CancelButton>
-        </Wrapper>
-    )
-
+      <Button onClick={handleIncludePatient}> Add Patient </Button>
+      <CancelButton href={"/patients/list"}> Cancel </CancelButton>
+    </Wrapper>
+  );
 }
-
-
-

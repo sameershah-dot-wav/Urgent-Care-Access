@@ -7,6 +7,7 @@ import {
   PatientsInsert,
   PatientsUpdate,
   SignUp,
+  SignIn,
   Home,
 } from "../pages";
 
@@ -16,6 +17,7 @@ function App() {
       <Router>
         <Switch>
           <Route path="/signup" exact component={SignUp} />
+          <Route path="/login" exact component={SignIn} />
           <div>
             <NavBar />
             <Route path="/" exact component={Home} />

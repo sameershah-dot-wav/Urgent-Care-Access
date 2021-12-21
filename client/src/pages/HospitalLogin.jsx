@@ -13,6 +13,9 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+
+//source code for signin page template: https://github.com/mui-org/material-ui/blob/v4.x/docs/src/pages/getting-started/templates/sign-in/SignIn.js
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -52,11 +55,22 @@ export default function SignIn() {
             margin="normal"
             required
             fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
+            id="hospitalName"
+            label="Hospital Name"
+            name="hospitalName"
+            autoComplete="hospitalName"
             autoFocus
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="postcode"
+            label="Postcode"
+            type="postcode"
+            id="postcode"
+            autoComplete="current-postcode"
           />
           <TextField
             variant="outlined"
@@ -89,7 +103,7 @@ export default function SignIn() {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/signup" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>

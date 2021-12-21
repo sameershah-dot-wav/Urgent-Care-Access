@@ -7,6 +7,7 @@ const apiPort = 3000;
 
 const db = require("./db");
 const patientRouter = require("./routes/patient-router");
+const hospitalRouter = require("./routes/hospital-router")
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
@@ -19,5 +20,6 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api", patientRouter);
+app.use("/api", hospitalRouter);
 
 app.listen(apiPort, () => console.log(`Server running on port ${apiPort}`));

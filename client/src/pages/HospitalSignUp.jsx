@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -12,6 +12,8 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+
+import api from "../api";
 
 
 //source code for signup page template: https://github.com/mui-org/material-ui/blob/v4.x/docs/src/pages/getting-started/templates/sign-up/SignUp.js
@@ -39,6 +41,38 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp() {
   const classes = useStyles();
 
+  const [name, setName] = useState("")
+  const [postcode, setPostcode] = useState("")
+  const [password, setPassword] = useState("")
+
+  async function handleChangeInputName(e) {
+    const name =  e.target.value;
+    setName(name);
+
+  }
+
+  async function handleChangeInputPostcode(e) {
+    const postcode = e.target.value;
+    setPostcode(postcode);
+  }
+
+  async function handleChangeInputPassword(e) {
+    const password = e.target.value;
+    setPassword(password);
+  }
+
+  async function handleIncludeHospital() {
+    const payload = { name, postcode, password};
+
+    await api.insertHospital(payload).then((res) => {
+      window.alert(`Hospital Inserted Succesfully`);
+      setName("");
+      setPostcode("");
+      setPassword("");
+    });
+  }
+    
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -53,6 +87,7 @@ export default function SignUp() {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
+                value={name}
                 autoComplete="name"
                 name="hospitalName"
                 variant="outlined"
@@ -61,11 +96,13 @@ export default function SignUp() {
                 id="hospitalName"
                 label="Hospital Name"
                 autoFocus
+                onChange={handleChangeInputName}
               />
             </Grid>
 
             <Grid item xs={12}>
               <TextField
+                value={postcode}
                 variant="outlined"
                 required
                 fullWidth
@@ -73,10 +110,12 @@ export default function SignUp() {
                 label="Hospital Postcode"
                 name="postcode"
                 autoComplete="postcode"
+                onChange={handleChangeInputPostcode}
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
+                value={password}
                 variant="outlined"
                 required
                 fullWidth
@@ -85,22 +124,13 @@ export default function SignUp() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="repeatPassword"
-                label="Repeat Password"
-                name="repeat password"
-                autoComplete="repeatPassword"
+                onChange={handleChangeInputPassword }
               />
             </Grid>
           </Grid>
           <Button
-            type="submit"
+            href="/"
+            onClick={handleIncludeHospital}
             fullWidth
             variant="contained"
             color="primary"

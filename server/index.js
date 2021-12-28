@@ -23,3 +23,5 @@ app.use("/api", patientRouter);
 app.use("/api", hospitalRouter);
 
 app.listen(apiPort, () => console.log(`Server running on port ${apiPort}`));
+
+module.exports = app;

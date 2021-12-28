@@ -1,5 +1,5 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React, {useState} from "react";
+import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import { NavBar } from "../components";
 
 import {
@@ -11,7 +11,11 @@ import {
   Home,
 } from "../pages";
 
+
 function App() {
+
+  const [isUserAuthenticated, setIsUserAuthenticated] = useState(true)
+
   return (
     <div className="App">
       <Router>
@@ -20,7 +24,10 @@ function App() {
           <Route path="/login" exact component={SignIn} />
           <div>
             <NavBar />
-            <Route path="/" exact component={Home} />
+            <Route exact path="">
+              {isUserAuthenticated ? <Redirect to="/signup"/> : <Redirect to="/home" />}
+            </Route>
+            <Route path="/home" exact component={Home} />
             <Route path="/patients/list" exact component={PatientsList} />
             <Route path="/patient/create" exact component={PatientsInsert} />
             <Route

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,6 +12,9 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+
+
+import api from "../api";
 
 
 //source code for signin page template: https://github.com/mui-org/material-ui/blob/v4.x/docs/src/pages/getting-started/templates/sign-in/SignIn.js
@@ -39,6 +42,31 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn() {
   const classes = useStyles();
 
+
+  const [name, setName] = useState("")
+  const [postcode, setPostcode] = useState("")
+  const [password, setPassword] = useState("")
+
+  async function handleChangeInputName(e) {
+    const name =  e.target.value;
+    setName(name);
+
+  }
+
+  async function handleChangeInputPostcode(e) {
+    const postcode = e.target.value;
+    setPostcode(postcode);
+  }
+
+  async function handleChangeInputPassword(e) {
+    const password = e.target.value;
+    setPassword(password);
+  }
+
+  async function handleLoginAuthentication() {
+    
+  }
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -59,6 +87,7 @@ export default function SignIn() {
             label="Hospital Name"
             name="hospitalName"
             autoComplete="hospitalName"
+            onChange={handleChangeInputName}
             autoFocus
           />
           <TextField
@@ -70,7 +99,8 @@ export default function SignIn() {
             label="Postcode"
             type="postcode"
             id="postcode"
-            autoComplete="current-postcode"
+            autoComplete="postcode"
+            onChange={handleChangeInputPostcode}
           />
           <TextField
             variant="outlined"
@@ -81,14 +111,13 @@ export default function SignIn() {
             label="Password"
             type="password"
             id="password"
-            autoComplete="current-password"
+            autoComplete="password"
+            onChange={handleChangeInputPassword}
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
-          <Button
-            type="submit"
+        
+        <Button
+            href="/"
+            onClick={handleLoginAuthentication}
             fullWidth
             variant="contained"
             color="primary"
@@ -96,6 +125,7 @@ export default function SignIn() {
           >
             Sign In
           </Button>
+
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">

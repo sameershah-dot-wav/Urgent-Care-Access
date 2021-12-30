@@ -4,7 +4,10 @@ const HospitalController = require("../controller/hospital-controller");
 
 const router = express.Router();
 
-router.post("/hospital", HospitalController.createHospital);
-router.get("/hospitals", HospitalController.getHospitals);
+
+
+router.post("/hospital/create", HospitalController.createHospital);
+
+router.get("/hospitals/list", HospitalController.getHospitals);
 
 module.exports = router;

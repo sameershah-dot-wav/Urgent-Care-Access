@@ -133,6 +133,17 @@ createHospital = async (req, res) => {
     } 
   }
 
+  getLoggedInHospital = async (req, res) => {
+    
+    try { 
+      const hospital = await Hospital.findById(req.hospital.id);
+      console.log(hospital)
+      res.json(hospital);
+    } catch (e) {
+      res.send({ message: "Error in fetching hospital" });
+    }
+  };
+
   getHospitals = async (req, res) => {
     await Hospital.find({}, (err, hospitals) => {
       if (err) {
@@ -147,4 +158,4 @@ createHospital = async (req, res) => {
     }).catch((err) => console.log(err));
   };
 
-  module.exports = {createHospital, getHospitals, loginHospital};
+  module.exports = {createHospital, getHospitals, loginHospital, getLoggedInHospital};

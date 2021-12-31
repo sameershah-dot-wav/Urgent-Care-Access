@@ -14,7 +14,7 @@ import {
 
 function App() {
 
-  const [isUserAuthenticated, setIsUserAuthenticated] = useState(true)
+  const [isUserAuthenticated, setIsUserAuthenticated] = useState(false)
 
   return (
     <div className="App">
@@ -25,7 +25,7 @@ function App() {
           <div>
             <NavBar />
             <Route exact path="">
-              {isUserAuthenticated ? <Redirect to="/signup"/> : <Redirect to="/home" />}
+              {isUserAuthenticated ? <Redirect to="/home"/> : <Redirect to="/signup" />}
             </Route>
             <Route path="/home" exact component={Home} />
             <Route path="/patients/list" exact component={PatientsList} />

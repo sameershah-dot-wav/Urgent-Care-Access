@@ -46,6 +46,8 @@ export default function SignIn() {
   const [name, setName] = useState("")
   const [postcode, setPostcode] = useState("")
   const [password, setPassword] = useState("")
+  const [aToken, setToken] = useState("")
+
 
   async function handleChangeInputName(e) {
     const name =  e.target.value;
@@ -59,12 +61,28 @@ export default function SignIn() {
   }
 
   async function handleChangeInputPassword(e) {
+    
     const password = e.target.value;
     setPassword(password);
   }
 
   async function handleLoginAuthentication() {
+
     
+    const payload = {name, postcode, password};
+
+    const response = await api.loginHospital(payload);
+
+    const token = response.data.token;
+
+    setToken(token)
+
+    await api.getLoggedInHospital(token).then((res) => {
+      window.alert("Successfully logged in")
+    });
+
+    console.log(aToken)
+
   }
 
   return (
@@ -75,7 +93,7 @@ export default function SignIn() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Sign in 
         </Typography>
         <form className={classes.form} noValidate>
           <TextField
@@ -116,7 +134,7 @@ export default function SignIn() {
           />
         
         <Button
-            href="/"
+            href="/home"
             onClick={handleLoginAuthentication}
             fullWidth
             variant="contained"

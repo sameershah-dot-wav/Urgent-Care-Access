@@ -12,6 +12,8 @@ export const getPatientById = id => api.get(`/patient/${id}`)
 
 export const insertHospital = payload => api.post(`/hospital/create`, payload)
 export const getAllHospitals = payload => api.get(`/hospitals/list`)
+export const loginHospital = payload => api.post("/hospital/login", payload)
+export const getLoggedInHospital = token => api.get(`/hospital/me`, { headers: {'token': token}})
 
 
 const apis = {
@@ -22,6 +24,8 @@ const apis = {
     getPatientById,
     insertHospital,
     getAllHospitals,
+    loginHospital,
+    getLoggedInHospital,
 }
 
 

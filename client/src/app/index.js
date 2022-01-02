@@ -24,9 +24,9 @@ function App() {
           <Route path="/login" exact component={SignIn} />
           <div>
             <NavBar />
-            <Route exact path="">
+            {/* <Route exact path="">
               {isUserAuthenticated ? <Redirect to="/home"/> : <Redirect to="/signup" />}
-            </Route>
+            </Route> */}
             <Route path="/home" exact component={Home} />
             <Route path="/patients/list" exact component={PatientsList} />
             <Route path="/patient/create" exact component={PatientsInsert} />

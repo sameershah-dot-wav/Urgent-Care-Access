@@ -9,6 +9,7 @@ module.exports = function(req, res, next) {
     try {
         const decoded = jwt.verify(token, "randomString");
         req.hospital = decoded.hospital;
+        console.log("logged in")
         next();
     } catch (e) {
         console.error(e);

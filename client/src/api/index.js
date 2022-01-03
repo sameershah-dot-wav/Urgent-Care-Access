@@ -16,6 +16,7 @@ export const loginHospital = payload => api.post("/hospital/login", payload)
 export const getLoggedInHospital = token => api.get(`/hospital/me`, { headers: {'token': token}})
 
 
+
 const apis = {
     getAllPatients,
     deletePatientById,

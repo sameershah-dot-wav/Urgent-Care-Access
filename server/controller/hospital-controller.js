@@ -78,7 +78,6 @@ createHospital = async (req, res) => {
   }
 
 
-
   loginHospital = async (req, res) => {
 
     const errors = validationResult(req);
@@ -141,6 +140,8 @@ createHospital = async (req, res) => {
       res.send({ message: "Error in fetching hospital" });
     }
   };
+
+
 
 
   getHospitals = async (req, res) => {

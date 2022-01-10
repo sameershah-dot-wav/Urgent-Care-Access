@@ -46,7 +46,6 @@ export default function SignIn() {
   const [name, setName] = useState("")
   const [postcode, setPostcode] = useState("")
   const [password, setPassword] = useState("")
-  const [authToken, setAuthToken] = useState("")
 
 
   async function handleChangeInputName(e) {
@@ -68,7 +67,6 @@ export default function SignIn() {
 
   async function handleLoginAuthentication() {
 
-    
     const payload = {name, postcode, password};
 
     const response = await api.loginHospital(payload);
@@ -77,15 +75,11 @@ export default function SignIn() {
 
     localStorage.setItem("token", token);
 
-
-
     await api.getLoggedInHospital(token).then((res) => {
       window.alert("Successfully logged in")
     });
     
   }
-
-  console.log(authToken)
 
   return (
     <Container component="main" maxWidth="xs">

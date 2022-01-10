@@ -50,7 +50,6 @@ createHospital = async (req, res) => {
         hospital.password = await bcrypt.hash(password, salt);
 
         await hospital.save();
-        
 
         const payload = {
           hospital: {
@@ -122,8 +121,10 @@ createHospital = async (req, res) => {
               res.status(200).json({
                 token
               });
+              
             }
           );
+          
     } catch (e) {
       console.log(e);
       res.status(500).json({
@@ -140,7 +141,6 @@ createHospital = async (req, res) => {
       res.send({ message: "Error in fetching hospital" });
     }
   };
-
 
 
 

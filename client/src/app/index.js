@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-d
 import { NavBar } from "../components";
 
 
-
 import {
   PatientsList,
   PatientsInsert,
@@ -18,12 +17,14 @@ function App() {
 
   const [token, setToken] = useState(localStorage.getItem("token"))
 
+  
+
   return (
     <div className="App">
       <Router>
         <Switch>
-          <Route path="/signup" exact component={SignUp} />
           <Route path="/login" exact component={SignIn} />
+          <Route path="/signup" exact component={SignUp} />
           <div>
             <NavBar />
             <Route exact path="">

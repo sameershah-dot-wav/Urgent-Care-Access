@@ -10,6 +10,7 @@ import {
   SignUp,
   SignIn,
   Home,
+  HospitalMap,
 } from "../pages";
 
 
@@ -25,6 +26,7 @@ function App() {
         <Switch>
           <Route path="/login" exact component={SignIn} />
           <Route path="/signup" exact component={SignUp} />
+          <Route path="/map" exact component={HospitalMap} />
           <div>
             <NavBar />
             <Route exact path="">

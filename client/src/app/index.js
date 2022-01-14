@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import { NavBar } from "../components";
 
+
 import {
   PatientsList,
   PatientsInsert,
@@ -14,18 +15,20 @@ import {
 
 function App() {
 
-  const [isUserAuthenticated, setIsUserAuthenticated] = useState(true)
+  const [token, setToken] = useState(localStorage.getItem("token"))
+
+  
 
   return (
     <div className="App">
       <Router>
         <Switch>
-          <Route path="/signup" exact component={SignUp} />
           <Route path="/login" exact component={SignIn} />
+          <Route path="/signup" exact component={SignUp} />
           <div>
             <NavBar />
             <Route exact path="">
-              {isUserAuthenticated ? <Redirect to="/signup"/> : <Redirect to="/home" />}
+              {token ? <Redirect to="/home"/> : <Redirect to="/signup" />}
             </Route>
             <Route path="/home" exact component={Home} />
             <Route path="/patients/list" exact component={PatientsList} />

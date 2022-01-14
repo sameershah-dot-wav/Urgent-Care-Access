@@ -115,6 +115,7 @@ getPatients = async (req, res) => {
   }).catch((err) => console.log(err));
 };
 
+
 module.exports = {
   createPatient,
   updatePatient,

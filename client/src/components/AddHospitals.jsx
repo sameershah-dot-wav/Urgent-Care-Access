@@ -17,8 +17,10 @@ export default function AddHospitals() {
             }
         };
 
-        const query = `[out:json];(way[healthcare~"^(hospital|clinic)$"](around:50000, -23.550519, -46.633309);\
-        relation[healthcare~"^(hospital|clinic)$"](around:50000, -23.550519, -46.633309););\
+        //around: [this is the distance in meters from the coordinates]
+
+        const query = `[out:json];(way[healthcare~"^(hospital|clinic)$"](around:10000, 51.485, -3.1626);\
+        relation[healthcare~"^(hospital|clinic)$"](around:10000, 51.485, -3.1626););\
         out center;>;out skel qt;`;
 
         const options = {

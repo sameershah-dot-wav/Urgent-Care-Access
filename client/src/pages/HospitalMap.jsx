@@ -14,6 +14,8 @@ import icon from "leaflet/dist/images/marker-icon.png";
 import iconShadow from "leaflet/dist/images/marker-shadow.png";
 import "leaflet-control-geocoder/dist/Control.Geocoder.css";
 import "leaflet-control-geocoder/dist/Control.Geocoder.js";
+import {AddHospitals} from "../components"
+
 
 
 
@@ -95,6 +97,7 @@ function HospitalMap() {
         </Popup>
       </Marker>
       <LocationMarker />
+      <AddHospitals />
     </MapContainer>
     
   );

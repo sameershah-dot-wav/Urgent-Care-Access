@@ -7,4 +7,5 @@ import Home from './Home'
 import HospitalMap from './HospitalMap'
 
 
-export { Home, PatientsList, PatientsInsert, PatientsUpdate, SignUp, SignIn, HospitalMap }
+
+export { Home, PatientsList, PatientsInsert, PatientsUpdate, SignUp, SignIn, HospitalMap}

@@ -6,7 +6,8 @@ import {
   Popup,
   useMapEvents,
   useMap,
-  Circle
+  Circle,
+  GeoJSON
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import * as L from "leaflet";
@@ -14,8 +15,6 @@ import icon from "leaflet/dist/images/marker-icon.png";
 import iconShadow from "leaflet/dist/images/marker-shadow.png";
 import "leaflet-control-geocoder/dist/Control.Geocoder.css";
 import "leaflet-control-geocoder/dist/Control.Geocoder.js";
-import {AddHospitals} from "../components"
-
 
 
 
@@ -27,6 +26,52 @@ import {AddHospitals} from "../components"
 const LeafIcon = L.Icon.extend({
   options: {},
 });
+
+
+
+
+function AddHospitals() {
+
+    const overpass = require("query-overpass");
+
+    const [geojson, setGeojson] = useState(null)
+
+    const [position, setPosition] = useState(null)
+
+    const map = useMap();
+
+    map.locate().on("locationfound", function (e) {
+        setPosition(e.latlng)
+    });
+
+    var dataHandler = (error, osmData) => {
+        if(!error && osmData.features !== null) {
+            setGeojson(osmData)
+        }
+    };
+
+
+    useEffect(() => {
+
+        //around: [this is the distance in meters from the coordinates]
+
+        console.log(position)
+
+        const query = `[out:json];(way[healthcare~"^(hospital|clinic)$"](around:10000, 51.485, -3.1626);\
+        relation[healthcare~"^(hospital|clinic)$"](around:10000, -23.550519, -46.633309););\
+        out center;>;out skel qt;`;
+
+        const options = {
+            flatProperties:  true
+        };
+        overpass(query, dataHandler, options)
+    }, [map, position])
+
+    return(
+        geojson ? <GeoJSON data={geojson} /> : null
+    )
+
+}
 
 
 function LocationMarker() {
@@ -51,6 +96,7 @@ function LocationMarker() {
     },
   });
 
+  
 
   return position === null ? null : (
     <>
@@ -87,6 +133,7 @@ function HospitalMap() {
         height: "1000px", //This field is required for rendering the map correctly
       }}
     >
+    <AddHospitals />
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -97,7 +144,7 @@ function HospitalMap() {
         </Popup>
       </Marker>
       <LocationMarker />
-      <AddHospitals />
+      
     </MapContainer>
     
   );

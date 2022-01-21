@@ -5,7 +5,8 @@ import SignUp from './HospitalSignUp'
 import  SignIn from './HospitalLogin'
 import Home from './Home'
 import HospitalMap from './HospitalMap'
+import Map from './MapBox'
 
 
 
-export { Home, PatientsList, PatientsInsert, PatientsUpdate, SignUp, SignIn, HospitalMap}
+export { Home, PatientsList, PatientsInsert, PatientsUpdate, SignUp, SignIn, HospitalMap, Map}

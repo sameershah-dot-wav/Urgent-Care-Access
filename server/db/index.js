@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 
 mongoose
   .connect(
-    "mongodb+srv://C1946094:l7JrAIyRu8kXtnKK@cluster0.ssqzo.mongodb.net/patient?retryWrites=true&w=majority",
+    "mongodb+srv://C1946094:tzwoo9YdsWJ118Ey@cluster0.ssqzo.mongodb.net/patient?retryWrites=true&w=majority",
     { useNewUrlParser: true }
   )
   .then(() => {
@@ -17,3 +17,5 @@ mongoose
 const db = mongoose.connection;
 
 module.exports = db;
+
+

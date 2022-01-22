@@ -5,6 +5,8 @@ const Hospital = new Schema({
     name: {type: String, required: true },
     postcode: {type: String, required: true},
     password: {type: String, required: true},
+    latitude: {type: Number, required: true},
+    longitude: {type: Number, required: true}
   });
 
 

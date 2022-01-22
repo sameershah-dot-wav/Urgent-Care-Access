@@ -10,7 +10,8 @@ import {
   SignUp,
   SignIn,
   Home,
-  HospitalMap,
+  HospitalMap
+
 } from "../pages";
 
 

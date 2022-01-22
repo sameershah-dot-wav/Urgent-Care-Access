@@ -19,6 +19,7 @@ app.use(bodyParser.json());
 
 
 
+
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 app.use("/api", patientRouter);

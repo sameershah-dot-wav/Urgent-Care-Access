@@ -50,16 +50,29 @@ function LocateHospitals() {
         }
       }, []);
 
+
       useEffect(() => {
         setLoading(false);
       }, [hospitals]);
 
-      console.log(hospitals.data)
 
+     
+      if(hospitals.data) {
+          return <Marker
+                    position={[hospitals.data[0].latitude, hospitals.data[0].longitude]}
+                    />
+      } else {
+          console.log("no hospitals")
+      }
+
+
+      
       return null;
 
+      
 
-}
+ }
+        
 
 export default function HospitalMap() {
 
@@ -80,11 +93,16 @@ export default function HospitalMap() {
             })
         }
     })
+
+    
     
 
    
 
     return (
+        <>
+        
+       
         <Map center={[lat, lng]} zoom={12}>
             <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -123,8 +141,9 @@ export default function HospitalMap() {
         </Popup>
       )}
 
-      <LocateHospitals />
+        <LocateHospitals />
 
         </Map>
+        </>
     )
 }

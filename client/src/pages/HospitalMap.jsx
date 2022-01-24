@@ -34,7 +34,6 @@ function LocateHospitals() {
     const [hospitals, setHospitals] = useState([])
     const [loading, setLoading] = useState(false)
 
-
     useEffect(() => {
         fetchData();
     
@@ -56,21 +55,21 @@ function LocateHospitals() {
       }, [hospitals]);
 
 
-     
-      if(hospitals.data) {
-          return <Marker
-                    position={[hospitals.data[0].latitude, hospitals.data[0].longitude]}
-                    />
+      if (hospitals.data) {
+          hospitals.data.map((hospital) => {
+            return (
+                <Marker
+                position={hospital.latitude, hospital.longitude}
+                />
+            )
+          }
+              
+          )
       } else {
           console.log("no hospitals")
       }
 
-
-      
       return null;
-
-      
-
  }
         
 
@@ -108,21 +107,11 @@ export default function HospitalMap() {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
+
+        <LocateHospitals />
       
 
-      {hospitalData.features.map(hospital => (
-        <Marker
-          key={hospital.properties.PARK_ID}
-          position={[
-            hospital.geometry.coordinates[1],
-            hospital.geometry.coordinates[0]
-          ]}
-          onClick={() => {
-            setActiveHospital(hospital);
-          }}
-          
-        />
-      ))}
+      
 
       {activeHospital && (
         <Popup
@@ -140,8 +129,6 @@ export default function HospitalMap() {
           </div>
         </Popup>
       )}
-
-        <LocateHospitals />
 
         </Map>
         </>

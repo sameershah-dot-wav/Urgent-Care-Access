@@ -44,8 +44,6 @@ export default function SignUp() {
   const [name, setName] = useState("")
   const [postcode, setPostcode] = useState("")
   const [password, setPassword] = useState("")
-  const [latitude, setLatitude] = useState()
-  const [longitude, setLongitude] = useState()
 
   async function handleChangeInputName(e) {
     const name =  e.target.value;
@@ -65,7 +63,7 @@ export default function SignUp() {
 
 
   async function handleIncludeHospital() {
-    const payload = { name, postcode, password, latitude, longitude };
+    const payload = { name, postcode, password};
 
     await api.insertHospital(payload).then((res) => {
       window.alert(`Hospital Inserted Succesfully`);

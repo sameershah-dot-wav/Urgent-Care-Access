@@ -25,7 +25,6 @@ export default function NavBar() {
     <Container>
       <Nav>
         <Links />
-        <button onClick={localStorage.removeItem("token"), refreshPage}>Logout</button>
       </Nav>
     </Container>
   );

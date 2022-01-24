@@ -15,12 +15,17 @@ const Nav = styled.nav.attrs({
     margin-bottom 20 px;
 `;
 
+function refreshPage() {
+  window.location.reload(false);
+}
+
 
 export default function NavBar() {
   return (
     <Container>
       <Nav>
         <Links />
+        <button onClick={localStorage.removeItem("token"), refreshPage}>Logout</button>
       </Nav>
     </Container>
   );

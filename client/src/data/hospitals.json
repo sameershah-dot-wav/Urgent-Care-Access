@@ -10,7 +10,8 @@
       "properties": {
         "HOSPITAL_ID": 1,
         "NAME": "St Marys Hospital",
-        "POSTCODE": "W21NY"
+        "POSTCODE": "W21NY",
+        "PATIENTS": 12
       },
       "geometry": {
         "type": "Point",
@@ -22,7 +23,8 @@
       "properties": {
         "HOSPITAL_ID": 2,
         "NAME": "St Bartholomew's Hospital",
-        "POSTCODE": "EC1A7BE"
+        "POSTCODE": "EC1A7BE",
+        "PATIENTS": 24
       },
       "geometry": {
         "type": "Point",
@@ -34,7 +36,8 @@
       "properties": {
         "HOSPITAL_ID": 3,
         "NAME": "University Hospital Wales",
-        "POSTCODE": "CF244XW"
+        "POSTCODE": "CF244XW",
+        "PATIENTS" : 4
       },
       "geometry": {
         "type": "Point",

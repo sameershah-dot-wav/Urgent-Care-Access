@@ -137,6 +137,7 @@ export default function HospitalMap() {
           <div>
             <h2>{activeHospital.properties.NAME}</h2>
             <p>{activeHospital.properties.POSTCODE}</p>
+            <p>Patients: {activeHospital.properties.PATIENTS}</p>
           </div>
         </Popup>
       )}

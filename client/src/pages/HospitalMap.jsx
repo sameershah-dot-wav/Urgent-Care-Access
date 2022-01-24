@@ -4,7 +4,7 @@ import L, { Icon } from 'leaflet'
 import * as hospitalData from "../data/hospitals.json"
 import 'leaflet/dist/leaflet.css'
 import api from "../api";
-
+import '../app/App.css'
 
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
@@ -99,7 +99,6 @@ export default function HospitalMap() {
    
 
     return (
-        <>
         
        
         <Map center={[lat, lng]} zoom={12}>
@@ -108,7 +107,19 @@ export default function HospitalMap() {
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
 
-        <LocateHospitals />
+        {hospitalData.features.map(hospital => (
+          <Marker
+            key={hospital.properties.HOSPITAL_ID}
+            position={[
+              hospital.geometry.coordinates[1],
+              hospital.geometry.coordinates[0]
+            ]}
+              onClick={() => {
+              setActiveHospital(hospital);
+            }}
+            
+         />
+        ))}
       
 
       
@@ -126,11 +137,12 @@ export default function HospitalMap() {
           <div>
             <h2>{activeHospital.properties.NAME}</h2>
             <p>{activeHospital.properties.POSTCODE}</p>
+            <p>Patients: {activeHospital.properties.PATIENTS}</p>
           </div>
         </Popup>
       )}
 
         </Map>
-        </>
+  
     )
 }

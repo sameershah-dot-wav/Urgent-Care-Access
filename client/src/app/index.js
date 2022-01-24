@@ -30,7 +30,7 @@ function App() {
           <Route path="/map" exact component={HospitalMap} />
           <div>
             
-            <Route exact path="/">
+            <Route exact path="">
               {token ? <Redirect to="/home"/> : <Redirect to="/signup" />}
             </Route>
             <NavBar />

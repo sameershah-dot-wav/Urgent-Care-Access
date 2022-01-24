@@ -99,7 +99,6 @@ export default function HospitalMap() {
    
 
     return (
-        <>
         
        
         <Map center={[lat, lng]} zoom={12}>
@@ -108,7 +107,19 @@ export default function HospitalMap() {
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
 
-        <LocateHospitals />
+        {hospitalData.features.map(hospital => (
+          <Marker
+            key={hospital.properties.HOSPITAL_ID}
+            position={[
+              hospital.geometry.coordinates[1],
+              hospital.geometry.coordinates[0]
+            ]}
+              onClick={() => {
+              setActiveHospital(hospital);
+            }}
+            
+         />
+        ))}
       
 
       
@@ -131,6 +142,6 @@ export default function HospitalMap() {
       )}
 
         </Map>
-        </>
+  
     )
 }

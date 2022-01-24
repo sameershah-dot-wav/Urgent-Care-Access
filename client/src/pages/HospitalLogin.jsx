@@ -73,9 +73,10 @@ export default function SignIn() {
 
     const token = response.data.token;
 
-    localStorage.setItem("token", token);
+    
 
     await api.getLoggedInHospital(token).then((res) => {
+      localStorage.setItem("token", token);
       window.alert("Successfully logged in")
     });
     

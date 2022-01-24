@@ -4,7 +4,7 @@ import L, { Icon } from 'leaflet'
 import * as hospitalData from "../data/hospitals.json"
 import 'leaflet/dist/leaflet.css'
 import api from "../api";
-
+import '../app/App.css'
 
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';

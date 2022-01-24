@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
-import { NavBar } from "../components";
+import { NavBar, Links } from "../components";
 
 
 import {
@@ -29,10 +29,11 @@ function App() {
           <Route path="/signup" exact component={SignUp} />
           <Route path="/map" exact component={HospitalMap} />
           <div>
-            <NavBar />
-            <Route exact path="">
+            
+            <Route exact path="/">
               {token ? <Redirect to="/home"/> : <Redirect to="/signup" />}
             </Route>
+            <NavBar />
             <Route path="/home" exact component={Home} />
             <Route path="/patients/list" exact component={PatientsList} />
             <Route path="/patient/create" exact component={PatientsInsert} />

@@ -61,8 +61,9 @@ export default function SignUp() {
     setPassword(password);
   }
 
+
   async function handleIncludeHospital() {
-    const payload = { name, postcode, password };
+    const payload = { name, postcode, password};
 
     await api.insertHospital(payload).then((res) => {
       window.alert(`Hospital Inserted Succesfully`);

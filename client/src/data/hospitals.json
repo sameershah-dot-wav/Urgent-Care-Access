@@ -1,0 +1,45 @@
+{
+  "type": "FeatureCollection",
+  "crs": {
+    "type": "name",
+    "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "HOSPITAL_ID": 1,
+        "NAME": "St Marys Hospital",
+        "POSTCODE": "W21NY"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-0.1743, 51.5176]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "HOSPITAL_ID": 2,
+        "NAME": "St Bartholomew's Hospital",
+        "POSTCODE": "EC1A7BE"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-0.1, 51.5175]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "HOSPITAL_ID": 3,
+        "NAME": "University Hospital Wales",
+        "POSTCODE": "CF244XW"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-3.19017581841, 51.5059981968]
+      }
+    }
+  ]
+}

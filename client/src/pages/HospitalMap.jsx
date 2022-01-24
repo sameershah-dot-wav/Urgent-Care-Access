@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
-import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from 'react-leaflet'
+import React, {useState, useEffect} from 'react';
+import { Map, Marker, Popup, TileLayer} from 'react-leaflet'
 import L, { Icon } from 'leaflet'
-import * as parkData from "../data/skateboard-parks.json"
+import * as hospitalData from "../data/hospitals.json"
 import 'leaflet/dist/leaflet.css'
+import api from "../api";
 
 
 import icon from 'leaflet/dist/images/marker-icon.png';
@@ -22,79 +23,114 @@ var greenIcon = new L.Icon({
     shadowSize: [41, 41]
   });
 
-  function LocationMarker() {
-
-    const [position, setPosition] = useState(null);
-
-    const map = useMapEvents({
-        click() {
-          map.locate()
-        },
-        locationfound(e) {
-          setPosition(e.latlng)
-          map.flyTo(e.latlng, map.getZoom())
-        },
-      })
-
-      return position === null ? null :(
-          <Marker position={position}
-          icon={greenIcon}>
-              <Popup>You Are Here</Popup>
-          </Marker>
-      )
-
-  }
-
 
 
 
 
 L.Marker.prototype.options.icon = DefaultIcon;
 
+function LocateHospitals() {
+
+    const [hospitals, setHospitals] = useState([])
+    const [loading, setLoading] = useState(false)
+
+    useEffect(() => {
+        fetchData();
+    
+        async function fetchData() {
+          setLoading(true);
+    
+          const response = await api.getAllHospitals();
+    
+          const data = response.data;
+    
+          setHospitals(data);
+
+        }
+      }, []);
+
+
+      useEffect(() => {
+        setLoading(false);
+      }, [hospitals]);
+
+
+      if (hospitals.data) {
+          hospitals.data.map((hospital) => {
+            return (
+                <Marker
+                position={hospital.latitude, hospital.longitude}
+                />
+            )
+          }
+              
+          )
+      } else {
+          console.log("no hospitals")
+      }
+
+      return null;
+ }
+        
+
 export default function HospitalMap() {
 
-    const [activePark, setActivePark] = useState(null);
+    const [activeHospital, setActiveHospital] = useState(null);
+
+    const [lat, setLat] = useState(51.5175)
+    const [lng, setLng] = useState(-0.1000)
+
+      
+
+    useEffect(() => {
+        getLocation()
+
+        async function getLocation() {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                setLat(position.coords.latitude)
+                setLng(position.coords.longitude)
+            })
+        }
+    })
+
+    
+    
+
    
 
     return (
-        <MapContainer center={[45.421532, -75.697189]} zoom={12}>
+        <>
+        
+       
+        <Map center={[lat, lng]} zoom={12}>
             <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
+
+        <LocateHospitals />
       
 
-      {parkData.features.map(park => (
-          <Marker key={park.properties.PARK_ID}
-           position=
-           {[park.geometry.coordinates[1],
-            park.geometry.coordinates[0]
-            ]}
-            onClick={()=> {
-                setActivePark(park);
-            }}
-            >
-            </Marker>
-        ))}
+      
 
-        {activePark && (
-            <Popup
-                position={[
-                    activePark.geometry.coordinates[1],
-                    activePark.geometry.coordinates[0]
-                ]}
-                onClose={() => {
-                    setActivePark(null)
-                }}
-                >
-                    <div>
-                        <h2>{activePark.properties.NAME}</h2>
-                        <p>{activePark.properties.DESCRIPTIO}</p>
-                    </div>
-                </Popup>
-        )}
+      {activeHospital && (
+        <Popup
+          position={[
+            activeHospital.geometry.coordinates[1],
+            activeHospital.geometry.coordinates[0]
+          ]}
+          onClose={() => {
+            setActiveHospital(null);
+          }}
+        >
+          <div>
+            <h2>{activeHospital.properties.NAME}</h2>
+            <p>{activeHospital.properties.POSTCODE}</p>
+          </div>
+        </Popup>
+      )}
 
-        <LocationMarker/>
-        </MapContainer>
+        </Map>
+        </>
     )
 }

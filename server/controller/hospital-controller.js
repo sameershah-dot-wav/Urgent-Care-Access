@@ -7,13 +7,8 @@ const jwt = require("jsonwebtoken");
 
 createHospital = async (req, res) => {
 
-  // check("name", "Please Enter a Valid Username")
-  // .not()
-  // .isEmpty(),
-  // check("postcode", "Please enter a valid postcode").not().isEmpty(),
-  // check("password", "Please enter a valid password").isLength({
-  //     min: 6
-  // })
+  console.log("hospital")
+
   
       const errors = validationResult(req); //extracts the validation errors from a request and makes them available in a Result object
       if(!errors.isEmpty()) {
@@ -43,8 +38,9 @@ createHospital = async (req, res) => {
         hospital = new Hospital({
           name,
           postcode,
-          password
+          password,
         });
+
 
         const salt = await bcrypt.genSalt(10);
         hospital.password = await bcrypt.hash(password, salt);
@@ -74,6 +70,8 @@ createHospital = async (req, res) => {
         console.log(err.message);
         res.status(500).send("Error in Saving");
       }
+
+      
   }
 
 

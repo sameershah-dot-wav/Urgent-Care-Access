@@ -120,9 +120,7 @@ export default function PatientsList() {
   ];
 
   let showTable = true;
-  // if (!patients.length) {
-  //     showTable = false
-  // }
+  
 
   return (
     <Wrapper>

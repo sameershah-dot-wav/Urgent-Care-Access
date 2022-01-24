@@ -17,6 +17,7 @@ https://structurizr.com/share/71403/diagrams#UrgentCareApp-SystemContext
 1. open terminal in project directory
 2. cd client
 3. npm install
-4. npm start
-5. open browser in localhost:8000
+4. npm run-script build 
+5. npm start
+6. open browser in localhost:8000
 
